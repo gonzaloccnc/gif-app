@@ -1,4 +1,5 @@
 import { useGifsStore } from '../store/GifsStore'
+import { BaseButtonPage } from './BaseButtonPage'
 
 interface PageButtonProps {
   value: number
@@ -14,12 +15,12 @@ const PageButton = ({ value, page }: PageButtonProps) => {
   }
 
   return (
-    <button
-      className={`rounded-md py-2 px-4 text-white font-bold ${activeClass}`}
+    <BaseButtonPage
+      bg={activeClass}
       onClick={handleClick}
     >
       {value}
-    </button>
+    </BaseButtonPage>
   )
 }
 

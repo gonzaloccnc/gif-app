@@ -10,6 +10,7 @@ interface GifProps {
   hints: number
   previousTerm: string
   currentPage: number
+  totalPages: number
 }
 interface GifsState extends GifProps {
   getGifs: (searchTerm: string, offset?: number, limit?: number) => Promise<void>
@@ -26,6 +27,7 @@ export const useGifsStore = create<GifsState>()(
       hints: 0,
       previousTerm: '',
       currentPage: 0,
+      totalPages: 0,
 
       async getGifs(term, offset = 0, limit = 50) {
         const url = `https://api.giphy.com/v1/gifs/search?api_key=gSTV6JClsR2d7n3a0rgPGBhGcXFNUU0o&q=${term}&limit=${limit}&offset=${offset}`
@@ -38,7 +40,8 @@ export const useGifsStore = create<GifsState>()(
             isLoading: false,
             hints: res.pagination.total_count,
             previousTerm: term,
-            currentPage: (offset / limit)
+            currentPage: (offset / limit),
+            totalPages: Math.ceil(res.pagination.total_count / limit)
           })
         } catch (ex) {
           set({ error: ex })
