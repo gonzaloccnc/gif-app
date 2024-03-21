@@ -6,6 +6,7 @@ import { PageButton } from './PageButton'
 interface ContainerPageableProps {
   pages: number
   visibleItems: number
+  currentPage: number
 }
 
 const ContainerPageable = ({ pages, visibleItems }: ContainerPageableProps) => {
@@ -33,11 +34,11 @@ const ContainerPageable = ({ pages, visibleItems }: ContainerPageableProps) => {
   }
 
   return (
-    <div className='flex gap-3 mt-5 max-w-[356px] items-center justify-center mx-auto'>
+    <div className='flex gap-3 mt-5 items-center justify-center mx-auto'>
       <BaseButtonPage onClick={() => { handleClick('subs') }}>
         {'<<'}
       </BaseButtonPage>
-      <div className='max-w-[250px] flex gap-3'>
+      <div className='flex gap-3'>
         {
           nextItems.map(x => (
             <PageButton key={x} value={x + 1} page={x} />

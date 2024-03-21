@@ -15,6 +15,7 @@ interface GifProps {
 interface GifsState extends GifProps {
   getGifs: (searchTerm: string, offset?: number, limit?: number) => Promise<void>
   addHistoryItem: (item: string) => void
+  updateCurrentPage: (page: number) => void
 }
 
 export const useGifsStore = create<GifsState>()(
@@ -30,11 +31,13 @@ export const useGifsStore = create<GifsState>()(
       totalPages: 0,
 
       async getGifs(term, offset = 0, limit = 50) {
+        const pages = term !== get().previousTerm ? 0 : get().totalPages
+
         const url = `https://api.giphy.com/v1/gifs/search?api_key=gSTV6JClsR2d7n3a0rgPGBhGcXFNUU0o&q=${term}&limit=${limit}&offset=${offset}`
-        set({ isLoading: true })
+        set({ isLoading: true, totalPages: pages })
 
         try {
-          const res = await fetch(url).then(res => res.json()) as GifResponse
+          const res = await fetch(url).then(r => r.json()) as GifResponse
           set({
             gifs: res.data,
             isLoading: false,
@@ -56,8 +59,11 @@ export const useGifsStore = create<GifsState>()(
         window.localStorage.setItem('history', JSON.stringify(historyLS))
 
         set({ history: historyParsed })
-      }
+      },
 
+      updateCurrentPage(page) {
+        set({ currentPage: page })
+      }
     }),
     {
       name: 'history',

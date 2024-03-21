@@ -3,7 +3,7 @@ import { GifCard } from '../components/GifCard'
 import { useGifsStore } from '../store/GifsStore'
 
 const GifsContainer = () => {
-  const { gifs, isLoading, error, totalPages } = useGifsStore()
+  const { gifs, isLoading, currentPage, error, totalPages } = useGifsStore()
 
   if (error != null) {
     return <h1 className='mt-5'>Ups hubo un error al solicitar los gifs</h1>
@@ -13,7 +13,7 @@ const GifsContainer = () => {
     <>
       {
         totalPages > 1
-          ? <ContainerPageable visibleItems={5} pages={totalPages} />
+          ? <ContainerPageable visibleItems={5} pages={totalPages} currentPage={currentPage} />
           : null
       }
 
