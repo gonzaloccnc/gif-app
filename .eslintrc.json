@@ -33,6 +33,7 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/promise-function-async": "off",
-        "generator-star-spacing": "off"
+        "generator-star-spacing": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }

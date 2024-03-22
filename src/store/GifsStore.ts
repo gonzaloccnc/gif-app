@@ -43,7 +43,7 @@ export const useGifsStore = create<GifsState>()(
             isLoading: false,
             hints: res.pagination.total_count,
             previousTerm: term,
-            currentPage: (offset / limit),
+            currentPage: (offset / limit) - 1,
             totalPages: Math.ceil(res.pagination.total_count / limit)
           })
         } catch (ex) {
