@@ -2,11 +2,12 @@ import { GifCard } from '../components/GifCard'
 import { useGifs } from '../hooks/useGifs'
 
 const GifsContainer = () => {
-  const { isError, fetchNextPage, gifs, isLoading, hasNextPage } = useGifs('mamut')
+  const { isError, fetchNextPage, gifs, isLoading, hasNextPage } = useGifs()
 
   if (isError) {
     return <h1 className='mt-5'>Ups hubo un error al solicitar los gifs</h1>
   }
+  console.log('render from container')
 
   return (
     <>
@@ -16,21 +17,19 @@ const GifsContainer = () => {
           : <>
             <section className='grid grid-cols-4 gap-x-2 gap-y-5 mt-5'>
               {
-                gifs?.map((gif) => (
+                gifs?.map((gif, i) => (
                   <GifCard
-                    key={gif.id}
+                    key={crypto.randomUUID()}
                     title={gif.title}
-                    url={gif.images.original.url}
+                    url={gif.images.downsized_medium.url}
+                    isLast={i === gifs.length - 1}
+                    fetchNextPage={fetchNextPage}
+                    hasNextPage={hasNextPage}
                   />
                 ))
               }
             </section>
           </>
-      }
-      {
-        hasNextPage
-          ? <h1 className='w-full py-3 text-center' onClick={() => { void fetchNextPage() }}>Cargar mas</h1>
-          : null
       }
     </>
   )

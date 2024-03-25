@@ -5,10 +5,10 @@ interface HistoryItemProps {
 }
 
 const HistoryItem = ({ item }: HistoryItemProps) => {
-  const searchGifs = useGifsStore(state => state.getGifs)
+  const setQuery = useGifsStore(state => state.setQuery)
 
   const handleClick = () => {
-    void searchGifs(item)
+    setQuery(item)
   }
 
   return (

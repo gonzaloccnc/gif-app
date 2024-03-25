@@ -5,7 +5,7 @@ const AsideBar = () => {
   const history = useGifsStore(state => state.history)
 
   return (
-    <aside className='bg-black fixed top-0 left-0 w-1/4 h-screen p-2'>
+    <aside className='bg-black fixed top-0 left-0 w-1/4 h-screen p-2 overflow-y-auto'>
       <header>
         <h1 className='text-white text-2xl border-b border-slate-700 py-3'>GifsApp</h1>
       </header>

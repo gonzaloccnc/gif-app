@@ -1,4 +1,3 @@
-import { useGifsStore } from '../store/GifsStore'
 import { BaseButtonPage } from './BaseButtonPage'
 
 interface PageButtonProps {

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-// import { useGifsStore } from '../store/GifsStore'
+import { useGifsStore } from '../store/GifsStore'
 
 const Search = () => {
   const [term, setTerm] = useState('')
-  // const { getGifs: searchGift, addHistoryItem } = useGifsStore()
+  const { setQuery } = useGifsStore()
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     setTerm(target.value)
@@ -12,8 +12,7 @@ const Search = () => {
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault()
     if (term.trim() === '') return
-    // void searchGift(term)
-    // addHistoryItem(term)
+    setQuery(term)
     setTerm('')
   }
 
